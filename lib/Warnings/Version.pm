@@ -30,7 +30,35 @@ $warnings{ 5.20       } = [ @{ $warnings{all} }, qw/ experimental::autoderef
 
 sub import {
     my $version = shift;
-    warnings->import::into(scalar caller, @{ $warnings{$version} });
+    warnings->import::into(scalar caller, get_warnings($version));
+}
+
+sub get_warnings {
+    my $version      = massage_version($_[0]);
+    my $perl_version = massage_version($]);
+    die "Unknown version: $version\n" unless grep { $version eq $_ } qw/ 5.6 5.8 5.10 5.12 5.14 5.16 5.18 5.20 /;
+
+    my $wanted       = $warnings{ $version       };
+    my $available    = $warnings{ $$perl_version };
+
+    return intersection( $wanted, $available );
+}
+
+sub massage_version {
+    my $version = shift;
+    my $_       = $version;
+
+    s/(5\.\d\d\d).*/$1/ or die "Unknown version: $version\n";
+    s/(5\.)0*/$1/       or die "Unknown version: $version\n";
+
+    return $_;
+}
+
+sub intersection {
+    my ($a1, $a2) = @_;
+    my %count;
+
+    return grep { $count{$_}++ > 1 } @{ $a1 }, @{ $a2 };
 }
 
 
