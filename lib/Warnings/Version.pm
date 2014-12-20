@@ -34,7 +34,8 @@ sub import {
 sub get_warnings {
     my $version      = massage_version($_[0]);
     my $perl_version = massage_version($]);
-    die "Unknown version: $version\n" unless grep { $version eq $_ } qw/ 5.6 5.8 5.10 5.12 5.14 5.16 5.18 5.20 /;
+    die "Unknown version: $version\n"           unless defined $warnings{ $version };
+    die "Unknown perl version: $perl_version\n" unless defined $warnings{ $perl_version };
 
     my $wanted       = $warnings{ $version       };
     my $available    = $warnings{ $$perl_version };
@@ -46,8 +47,8 @@ sub massage_version {
     my $version = shift;
     my $_       = $version;
 
-    s/(5\.\d\d\d).*/$1/ or die "Unknown version: $version\n";
-    s/(5\.)0*/$1/       or die "Unknown version: $version\n";
+    s/(5\.\d\d\d).*/$1/;
+    s/(5\.)0*/$1/;
 
     return $_;
 }
