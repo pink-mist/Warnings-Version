@@ -44,8 +44,7 @@ sub get_warnings {
 }
 
 sub massage_version {
-    my $version = shift;
-    my $_       = $version;
+    my $_ = shift;
 
     s/(5\.\d\d\d).*/$1/;
     s/(5\.)0*/$1/;
