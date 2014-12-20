@@ -28,12 +28,12 @@ $warnings{ 5.20       } = [ @{ $warnings{all} }, qw/ experimental::autoderef
 
 sub import {
     my $version = shift;
-    warnings->import::into(scalar caller, get_warnings($version));
+    warnings->import::into(scalar caller, get_warnings($version, $]));
 }
 
 sub get_warnings {
-    my $version      = massage_version($_[0]);
-    my $perl_version = massage_version($]);
+    my $version      = massage_version(shift);
+    my $perl_version = massage_version(shift);
     die "Unknown version: $version\n"           unless defined $warnings{ $version };
     die "Unknown perl version: $perl_version\n" unless defined $warnings{ $perl_version };
 
