@@ -35,11 +35,12 @@ sub import {
 sub get_warnings {
     my $version      = massage_version(shift);
     my $perl_version = massage_version(shift);
+
     die "Unknown version: $version\n"           unless defined $warnings{ $version };
     die "Unknown perl version: $perl_version\n" unless defined $warnings{ $perl_version };
 
     my $wanted       = $warnings{ $version       };
-    my $available    = $warnings{ $$perl_version };
+    my $available    = $warnings{ $perl_version };
 
     return intersection( $wanted, $available );
 }
