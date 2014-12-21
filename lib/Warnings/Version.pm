@@ -59,7 +59,7 @@ sub intersection {
     my ($a1, $a2) = @_;
     my %count;
 
-    return grep { $count{$_}++ > 1 } @{ $a1 }, @{ $a2 };
+    return grep { $count{$_}++ == 1 } @{ $a1 }, @{ $a2 };
 }
 
 
