@@ -55,6 +55,13 @@ SKIP: {
 like( get_warning('10-closure.pl'), qr/^\QVariable "\E\$\Qfoo" may be unavailable/, 'closure warning works' );
 like( get_warning('10-exiting.pl'), qr/^\QExiting eval via last/, 'exiting warning works' );
 
+SKIP: {
+    skip "Not sure how to cause a glob category warning", 1;
+
+    # 9
+    like( get_warning('10-glob.pl'), qr/^\Q.../, 'glob warning works' );
+};
+
 
 sub get_warning {
     my $script = "$prefix/$_[0]";
