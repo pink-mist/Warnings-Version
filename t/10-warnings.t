@@ -51,7 +51,7 @@ SKIP: {
     like( get_warning('10-layer.pl'), qr/^\Qperlio: argument list not closed for layer "encoding(UTF-8"/, 'layer warning works' );
 };
 
-# 7
+# 7 .. 8
 like( get_warning('10-closure.pl'), qr/^\QVariable "\E\$\Qfoo" may be unavailable/, 'closure warning works' );
 like( get_warning('10-exiting.pl'), qr/^\QExiting eval via last/, 'exiting warning works' );
 
