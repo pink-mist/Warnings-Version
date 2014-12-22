@@ -32,6 +32,12 @@ sub import {
     warnings->import::into(scalar caller, get_warnings($version, $]));
 }
 
+sub unimport {
+    my $package = shift;
+    my $version = shift;
+    warnings->unimport::from(scalar caller, get_warnings($version, $]));
+}
+
 sub get_warnings {
     my $version      = massage_version(shift);
     my $perl_version = massage_version(shift);
