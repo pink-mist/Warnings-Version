@@ -39,7 +39,7 @@ sub get_warnings {
     die "Unknown version: $version\n"           unless defined $warnings{ $version };
     die "Unknown perl version: $perl_version\n" unless defined $warnings{ $perl_version };
 
-    my $wanted       = $warnings{ $version       };
+    my $wanted       = $warnings{ $version      };
     my $available    = $warnings{ $perl_version };
 
     return intersection( $wanted, $available );
