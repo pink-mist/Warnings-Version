@@ -62,6 +62,9 @@ SKIP: {
     like( get_warning('10-glob.pl'), qr/^\Q.../, 'glob warning works' );
 };
 
+# 10
+like( get_warning('10-io.pl'), qr/^Filehandle (main::)?STDIN opened only for input/, 'io warning works' );
+
 
 sub get_warning {
     my $script = "$prefix/$_[0]";
