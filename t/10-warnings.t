@@ -48,11 +48,11 @@ SKIP: {
     skip "Layer warning category doesn't exist on perl 5.6", 1 if $perl_version eq '5.6';
 
     # 6
-    like( get_warning('10-layer.pl'), qr/^\Qperlio: argument list not closed for layer "encoding(UTF-8"/, 'layer warning works' );
+    like( get_warning('10-layer.pl'), qr/^(perlio: a|A)rgument list not closed for (PerlIO )?layer "encoding\(UTF-8"/, 'layer warning works' );
 };
 
 # 7 .. 8
-like( get_warning('10-closure.pl'), qr/^\QVariable "\E\$\Qfoo" may be unavailable/, 'closure warning works' );
+like( get_warning('10-closure.pl'), qr/^(Variable "\$foo" may be unavailable|Variable "\$foo" will not stay shared)/, 'closure warning works' );
 like( get_warning('10-exiting.pl'), qr/^\QExiting eval via last/, 'exiting warning works' );
 
 SKIP: {
