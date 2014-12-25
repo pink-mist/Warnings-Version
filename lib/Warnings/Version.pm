@@ -36,6 +36,7 @@ $warnings{ '5.20'     } = [ @{ $warnings{all} }, qw/ experimental::autoderef
 sub import {
     my $package = shift;
     my $version = shift;
+    $version = 'all' if not defined $version;
     warnings->import::into(scalar caller, get_warnings($version, $]));
 }
 
