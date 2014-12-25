@@ -97,7 +97,9 @@ sub get_warning {
         return "Error: No such file: $script";
     }
     my $pid = open3(\*IN, \*OUT, \*ERR, $perl_interp, "-I$inc", "$script");
-    chomp(my $foo = <ERR>);
+    my $foo = <ERR>;
+    $foo = "" unless defined $foo;
+    chomp($foo);
     waitpid($pid, 0);
     close IN;
     close OUT;
