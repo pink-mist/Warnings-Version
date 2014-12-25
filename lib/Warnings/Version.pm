@@ -124,3 +124,7 @@ you should still keep up to date with deprecations and perl's experiments so
 your code doesn't break when there's been actual changes in how things work,
 but with this module, at least your B<users> don't need to worry about that
 too.
+
+=head1 SEE ALSO
+
+=item * The core L<warnings> module.
