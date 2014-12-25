@@ -60,6 +60,7 @@ my %warnings = (
     malloc    => "Not sure how to cause a malloc warning",
     signal    => qr/\QNo such signal: SIGFOOBAR/,
     substr    => qr/\Qsubstr outside of string\E/,
+    syntax    => qr/\QFound = in conditional, should be ==\E/,
 );
 
 my @warnings = Warnings::Version::get_warnings('all', 'all');
