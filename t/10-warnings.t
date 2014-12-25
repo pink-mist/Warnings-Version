@@ -61,6 +61,9 @@ my %warnings = (
     signal    => qr/\QNo such signal: SIGFOOBAR/,
     substr    => qr/\Qsubstr outside of string\E/,
     syntax    => qr/\QFound = in conditional, should be ==\E/,
+    ambiguous => qr/
+        \QAmbiguous call resolved as CORE::chop(), qualify as such or use &\E
+        /x,
 );
 
 my @warnings = Warnings::Version::get_warnings('all', 'all');
