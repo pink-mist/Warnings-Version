@@ -64,6 +64,39 @@ my %warnings = (
     ambiguous => qr/^
         \QAmbiguous call resolved as CORE::log(), qualify as such or use &\E
         /x,
+    bareword  => qr/^\QBareword found in conditional/,
+    deprecated => qr/^\Qdefined(\E\@\Qarray) is deprecated\E/,
+    digit     => qr/^\QIllegal octal digit '8'\E/, # Since this causes an error
+        # we'll clobber it:
+    digit     => "Digit warnings seem to be fatal errors rather than warnings",
+    parenthesis => qr/^\QParentheses missing around "my" list\E/,
+    precedence => qr/^\QPrecedence problem: open FOO should be open(FOO)\E/,
+    printf    => qr/^\QInvalid conversion in sprintf: "%A"\E/,
+    prototype => qr/^\Qmain::foo() called too early to check prototype\E/,
+    qw        => qr/^\QPossible attempt to put comments in qw() list\E/,
+    reserved  => qr/^
+        \QUnquoted string "bar" may clash with future reserved word\E
+        /x,
+    semicolon => "Only warns when there's an error anyway",
+    taint     => qr/^
+        \QInsecure dependency in kill while running with -T switch\E
+        /x,
+    uninitialized => qr/^
+        \QUse of uninitialized value\E(\ \$foo)?\Q in numeric eq (==)\E
+        /x,
+    unpack    => qr/^(
+        \QInvalid type ',' in unpack\E
+            |
+        \QInvalid type in unpack: ','\E
+        )/x,
+    untie     => qr/^\Quntie attempted while 1 inner references still exist\E/,
+    void      => qr/^(
+        \QUseless use of a constant ("foo") in void context\E
+            |
+        \QUseless use of a constant in void context\E
+            |
+        \QUseless use of a constant (foo) in void context\E
+        )/x,
 );
 
 my @warnings = Warnings::Version::get_warnings('all', 'all');
