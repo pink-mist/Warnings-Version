@@ -59,6 +59,7 @@ my %warnings = (
     internal  => "Not sure how to cause an internal warning",
     malloc    => "Not sure how to cause a malloc warning",
     signal    => qr/\QNo such signal: SIGFOOBAR/,
+    substr    => qr/\Qsubstr outside of string\E/,
 );
 
 my @warnings = Warnings::Version::get_warnings('all', 'all');
