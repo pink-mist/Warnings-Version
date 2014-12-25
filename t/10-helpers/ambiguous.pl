@@ -3,6 +3,6 @@
 use strict;
 use Warnings::Version 'all';
 
-sub chop { }
+sub log { }
 
-chop(my $foo = 'bar');
+my $foo = log 3;
