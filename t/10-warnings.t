@@ -58,10 +58,10 @@ my %warnings = (
     inplace   => qr/^Can't open .*nonexistant: /,
     internal  => "Not sure how to cause an internal warning",
     malloc    => "Not sure how to cause a malloc warning",
-    signal    => qr/\QNo such signal: SIGFOOBAR/,
-    substr    => qr/\Qsubstr outside of string\E/,
-    syntax    => qr/\QFound = in conditional, should be ==\E/,
-    ambiguous => qr/
+    signal    => qr/^\QNo such signal: SIGFOOBAR/,
+    substr    => qr/^\Qsubstr outside of string\E/,
+    syntax    => qr/^\QFound = in conditional, should be ==\E/,
+    ambiguous => qr/^
         \QAmbiguous call resolved as CORE::chop(), qualify as such or use &\E
         /x,
 );
