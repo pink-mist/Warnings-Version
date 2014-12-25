@@ -76,7 +76,8 @@ foreach my $warning (@warnings) {
 
 
 SKIP: {
-    skip "Chmod and umask warning categories only exist on perl 5.6", 2 unless $perl_version eq '5.6';
+    skip "Chmod and umask warning categories only exist on perl 5.6", 2
+        unless $perl_version eq '5.6';
 
     like( get_warning('10-helpers/version-5.006-chmod.pl'),
         qr/^\Qchmod() mode argument is missing initial 0/,
