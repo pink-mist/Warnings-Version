@@ -22,7 +22,11 @@ my $perl_interp  = $^X;
 my $perl_version = Warnings::Version::massage_version($]);
 
 my %warnings = (
-    closure   => qr/^(Variable "\$foo" may be unavailable|Variable "\$foo" will not stay shared)/,
+    closure   => qr/^(
+        \QVariable "\E\$\Qfoo" may be unavailable\E
+            |
+        \QVariable "\E\$\Qfoo" will not stay shared\E
+        )/x,
     exiting   => qr/^\QExiting eval via last/,
     io        => qr/^Filehandle (main::)?STDIN opened only for input/,
     glob      => "Not sure how to cause a glob category warning",
@@ -30,7 +34,10 @@ my %warnings = (
     exec      => qr/^\QStatement unlikely to be reached/,
     newline   => qr/^\QUnsuccessful stat on filename containing newline/,
     pipe      => qr/^\QMissing command in piped open/,
-    unopened  => qr/^(\Qclose() on unopened filehandle FOO\E|\QClose on unopened file <FOO>\E)/,
+    unopened  => qr/^(
+        \Qclose() on unopened filehandle FOO\E
+            |
+        \QClose on unopened file <FOO>\E)/x,
     misc      => qr/^\QOdd number of elements in hash assignment/,
     numeric   => qr/^\QArgument "foo" isn't numeric in repeat (x)/,
     once      => qr/^\QName "main::foo" used only once: possible typo/,
@@ -40,7 +47,8 @@ my %warnings = (
     recursion => qr/^\QDeep recursion on subroutine "main::foo"/,
     redefine  => qr/^\QSubroutine foo redefined/,
     regexp    => qr!^(
-        \QFalse [] range "a-\d" in regex; marked by <-- HERE in m/[a-\d <-- HERE ]/\E
+        \QFalse [] range "a-\d" in regex; marked by <-- HERE in m/[a-\d <-- \E
+        \QHERE ]/\E
               |
         \Q/[a-\d]/: false [] range "a-\d" in regexp\E
               |
@@ -56,10 +64,12 @@ my %warnings = (
 my @warnings = Warnings::Version::get_warnings('all', 'all');
 foreach my $warning (@warnings) {
     SKIP: {
-        skip "Warning $warning not implemented", 1 unless exists $warnings{$warning};
-        skip $warnings{$warning}, 1                unless ref $warnings{$warning} eq 'Regexp';
+        skip "Warning $warning not implemented", 1 unless exists
+                                                       $warnings{$warning};
+        skip $warnings{$warning}, 1 unless ref $warnings{$warning} eq 'Regexp';
 
-        like( get_warning("10-helpers/$warning.pl"), $warnings{$warning}, "$warning warnings works ($^X)" );
+        like( get_warning("10-helpers/$warning.pl"),
+            $warnings{$warning}, "$warning warnings works ($^X)" );
     };
 }
 
@@ -67,27 +77,40 @@ foreach my $warning (@warnings) {
 SKIP: {
     skip "Chmod and umask warning categories only exist on perl 5.6", 2 unless $perl_version eq '5.6';
 
-    like( get_warning('10-helpers/version-5.006-chmod.pl'), qr/^\Qchmod() mode argument is missing initial 0/, 'chmod warning works' );
-    like( get_warning('10-helpers/version-5.006-umask.pl'), qr/^\Qumask: argument is missing initial 0/, 'umask warning works' );
+    like( get_warning('10-helpers/version-5.006-chmod.pl'),
+        qr/^\Qchmod() mode argument is missing initial 0/,
+        'chmod warning works' );
+    like( get_warning('10-helpers/version-5.006-umask.pl'),
+        qr/^\Qumask: argument is missing initial 0/, 'umask warning works' );
 };
 
 SKIP: {
-    skip "Y2K warnings only exist on perls 5.6 and 5.8", 1                        unless grep { $perl_version eq $_ } qw/ 5.6 5.8 /;
-    skip "Only run this test if perl has been built with Y2K warnings enabled", 1 unless $Config{ccflags} =~ /Y2KWARN/;
+    skip "Y2K warnings only exist on perls 5.6 and 5.8", 1
+        unless grep { $perl_version eq $_ } qw/ 5.6 5.8 /;
+    skip "Only run this test if perl has been built with Y2K warnings enabled"
+        , 1 unless $Config{ccflags} =~ /Y2KWARN/;
 
-    like( get_warning('10-helpers/y2k.pl'), qr/^\QPossible Y2K bug: about to append an integer to '19'/, 'y2k warning works' );
+    like( get_warning('10-helpers/y2k.pl'),
+        qr/^\QPossible Y2K bug: about to append an integer to '19'/,
+        'y2k warning works' );
 };
 
 SKIP: {
-    skip "There are no utf8 warnings on perls 5.14 or 5.16", 1, if grep { $perl_version eq $_ } qw/ 5.14 5.16 /;
+    skip "There are no utf8 warnings on perls 5.14 or 5.16", 1
+        if grep { $perl_version eq $_ } qw/ 5.14 5.16 /;
 
-    like( get_warning('10-helpers/utf8.pl'), qr/^\QMalformed UTF-8 character/, 'utf8 warning works' );
+    like( get_warning('10-helpers/utf8.pl'),
+        qr/^\QMalformed UTF-8 character/, 'utf8 warning works' );
 };
 
 SKIP: {
-    skip "Layer warning category doesn't exist on perl 5.6", 1 if $perl_version eq '5.6';
+    skip "Layer warning category doesn't exist on perl 5.6", 1
+        if $perl_version eq '5.6';
 
-    like( get_warning('10-helpers/layer.pl'), qr/^(perlio: a|A)rgument list not closed for (PerlIO )?layer "encoding\(UTF-8"/, 'layer warning works' );
+    like( get_warning('10-helpers/layer.pl'),
+        qr/^(perlio:\ a|A)rgument\ list\ not\ closed\ for\ (PerlIO\ )?layer
+            \ "encoding\(UTF-8"/x,
+        'layer warning works' );
 };
 
 sub get_warning {

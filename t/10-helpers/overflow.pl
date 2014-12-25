@@ -4,6 +4,7 @@ use strict;
 use Warnings::Version 'all';
 no warnings 'portable';
 
-#my $time = gmtime('NaN'); # don't do this ... causes segmentation fault on 5.20.1
+# don't do this ... causes segmentation fault on perls between 5.12.0 - 5.20.1
+#my $time = gmtime('NaN');
 
 my $num = 0xFFFF_FFFF_FFFF_FFFF_FFFF_FFFF_FFFF_FFFF_FFFF;
