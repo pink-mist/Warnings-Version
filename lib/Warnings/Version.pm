@@ -122,7 +122,7 @@ production, who don't want to get tonnes of emails and bugreports when someone
 upgrades their perl version and your code starts emitting warnings. Of course
 you should still keep up to date with deprecations and perl's experiments so
 your code doesn't break when there's been actual changes in how things work,
-but with this module, at least your B<users> don't need to worry about that
+but with this module, at least your I<users> don't need to worry about that
 too.
 
 =head1 SEE ALSO
