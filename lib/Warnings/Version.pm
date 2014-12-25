@@ -128,3 +128,9 @@ too.
 =head1 SEE ALSO
 
 =item * The core L<warnings> module.
+
+=head1 BUGS
+
+Please use the L<GitHub issue
+tracker|https://github.com/pink-mist/Warnings-Version/issues> issue tracker to
+report bugs to this distribution.
