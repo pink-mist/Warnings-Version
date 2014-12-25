@@ -2,6 +2,8 @@ use strict;
 use warnings;
 package Warnings::Version;
 
+# ABSTRACT: Load warnings from a specific version of perl
+
 use Import::Into;
 
 my %warnings;
@@ -71,10 +73,6 @@ sub intersection {
 
 1;
 __END__
-
-=head1 NAME
-
-Warnings::Version - Load warnings from a specific version of perl
 
 =head1 SYNOPSIS
 
