@@ -99,12 +99,6 @@ __END__
       #   For example, on perl 5.8 this will mean all 5.8 warnings except 'y2k'
       #   warnings.
 
-  use Warnings::Version '5.14';
-      # All warnings that exist on both perl 5.14 and your running version of
-      # perl will be enabled.
-      #   For example, on perl 5.8 this will mean all 5.8 warnings except 'y2k'
-      #   and 'utf8' warnings.
-
   use Warnings::Version 'all';
       # This special warning category gives you only the warnings that are on
       # _all_ perls that ship with the warnings pragma.
