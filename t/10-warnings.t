@@ -97,6 +97,7 @@ my %warnings = (
             |
         \QUseless use of a constant (foo) in void context\E
         )/x,
+    utf8      => qr/^\QMalformed UTF-8 character/,
 );
 
 my @warnings = Warnings::Version::get_warnings('all', 'all');
@@ -132,14 +133,6 @@ SKIP: {
     like( get_warning('10-helpers/y2k.pl'),
         qr/^\QPossible Y2K bug: about to append an integer to '19'/,
         'y2k warning works' );
-};
-
-SKIP: {
-    skip "There are no utf8 warnings on perls 5.14 or 5.16", 1
-        if grep { $perl_version eq $_ } qw/ 5.14 5.16 /;
-
-    like( get_warning('10-helpers/utf8.pl'),
-        qr/^\QMalformed UTF-8 character/, 'utf8 warning works' );
 };
 
 SKIP: {
