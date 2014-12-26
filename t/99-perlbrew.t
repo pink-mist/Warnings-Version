@@ -6,8 +6,8 @@ use warnings;
 use File::Basename;
 use Warnings::Version 'all';
 
-use Test::More ( $ENV{ALLBREWS} ? '' : skip_all
-    => "Author test that requires special setup ($^X)" );
+use Test::More ( $ENV{ALLBREWS} ? '' : ( skip_all =>
+        "Author test that requires special setup ($^X)" ) );
 
 my $prefix = dirname $0;
 my $name   = "Warnings/Version.pm";
