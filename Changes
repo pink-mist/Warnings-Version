@@ -1,6 +1,13 @@
 {{$NEXT}}
   Added Changes file
   Change the source code so it doesn't exceed 80 columns
+  Add numerous tests and rework how they're run
+  Let dzil handle more things, like GitHub integration, $VERSION
+  Added BUGS and SEE ALSO sections to POD
+  Specify minimum perl version
+  No version specification when 'use'ing the module is now interpreted as
+     use Warnings::Version 'all';
+  Bugfix: utf8 category warnings were also needed on perls 5.14 and 5.16
 
 Warnings-Version-0.001001 2014-12-25
   PodWeaver section added to dist.ini, to generate needed POD
