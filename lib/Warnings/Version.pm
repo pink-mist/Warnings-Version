@@ -4,6 +4,8 @@ package Warnings::Version;
 
 # ABSTRACT: Load warnings from a specific version of perl
 
+use 5.006;
+
 use Import::Into;
 
 my %warnings;
