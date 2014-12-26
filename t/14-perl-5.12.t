@@ -30,7 +30,13 @@ my %warnings = (
         /x,
 );
 
-check_warnings(keys %warnings);
+check_warnings(qw/ illegalproto /);
+
+SKIP: {
+    skip "Imprecision test doesn't work when using long doubles", 1 if
+                                                       $Config{uselongdouble};
+    check_warnings(qw/ imprecision /);
+};
 
 sub check_warnings {
     foreach my $warning (@_) {
