@@ -122,7 +122,11 @@ too.
 
 =head1 SEE ALSO
 
+=over
+
 =item * The core L<warnings> module.
+
+=back
 
 =head1 BUGS
 
