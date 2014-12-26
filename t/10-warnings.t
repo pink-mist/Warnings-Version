@@ -117,39 +117,6 @@ sub check_warnings {
     }
 }
 
-
-SKIP: {
-    skip "Chmod and umask warning categories only exist on perl 5.6", 2
-        unless $perl_version eq '5.6';
-
-    like( get_warning('10-helpers/version-5.006-chmod.pl'),
-        qr/^\Qchmod() mode argument is missing initial 0/,
-        'chmod warning works' );
-    like( get_warning('10-helpers/version-5.006-umask.pl'),
-        qr/^\Qumask: argument is missing initial 0/, 'umask warning works' );
-};
-
-SKIP: {
-    skip "Y2K warnings only exist on perls 5.6 and 5.8", 1
-        unless grep { $perl_version eq $_ } qw/ 5.6 5.8 /;
-    skip "Only run this test if perl has been built with Y2K warnings enabled"
-        , 1 unless $Config{ccflags} =~ /Y2KWARN/;
-
-    like( get_warning('10-helpers/y2k.pl'),
-        qr/^\QPossible Y2K bug: about to append an integer to '19'/,
-        'y2k warning works' );
-};
-
-SKIP: {
-    skip "Layer warning category doesn't exist on perl 5.6", 1
-        if $perl_version eq '5.6';
-
-    like( get_warning('10-helpers/layer.pl'),
-        qr/^(perlio:\ a|A)rgument\ list\ not\ closed\ for\ (PerlIO\ )?layer
-            \ "encoding\(UTF-8"/x,
-        'layer warning works' );
-};
-
 sub get_warning {
     my $script = "$prefix/$_[0]";
     if (not -f $script) {
