@@ -101,15 +101,20 @@ my %warnings = (
 );
 
 my @warnings = Warnings::Version::get_warnings('all', 'all');
-foreach my $warning (@warnings) {
-    SKIP: {
-        skip "Warning $warning not implemented", 1 unless exists
-                                                       $warnings{$warning};
-        skip $warnings{$warning}, 1 unless ref $warnings{$warning} eq 'Regexp';
+check_warnings(@warnings);
 
-        like( get_warning("10-helpers/$warning.pl"),
-            $warnings{$warning}, "$warning warnings works ($^X)" );
-    };
+sub check_warnings {
+    foreach my $warning (@_) {
+        SKIP: {
+            skip "Warning $warning not implemented", 1 unless exists
+                                                       $warnings{$warning};
+            skip $warnings{$warning}, 1 unless ref $warnings{$warning}
+                                                               eq 'Regexp';
+
+            like( get_warning("10-helpers/$warning.pl"),
+                $warnings{$warning}, "$warning warnings works ($^X)" );
+        };
+    }
 }
 
 
