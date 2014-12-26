@@ -23,7 +23,7 @@ my $perl_version = Warnings::Version::massage_version($]);
 
 my %warnings = (
     imprecision  => qr/^
-        \QLost precision when decrementing -9223372036854775808.000000 by 1\E
+        \QLost precision when decrementing -922337203685\E[\d.]+\Q by 1\E
         /x,
     illegalproto => qr/^
         \QIllegal character in prototype for main::foo : \E\$bar
