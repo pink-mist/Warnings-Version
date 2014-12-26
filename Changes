@@ -1,4 +1,7 @@
 {{$NEXT}}
+  Skip failing imprecision test when compiled with -Duselongdouble
+
+Warnings-Version-0.002001  2014-12-26
   POD fixups
 
 Warnings-Version-0.002     2014-12-26
