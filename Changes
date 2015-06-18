@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+Warnings-Version-0.003000  2015-06-18
   Update for perl 5.22 support
 
 Warnings-Version-0.002003 2014-12-27
