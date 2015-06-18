@@ -31,6 +31,13 @@ $warnings{ '5.20'     } = [ @{ $warnings{all} }, qw/ experimental::autoderef
     experimental::postderef experimental::regex_sets experimental::signatures
     experimental::smartmatch imprecision layer syscalls illegalproto threads
     non_unicode nonchar surrogate / ];
+$warnings{ '5.22'     } = [ @{ $warnings{all} }, qw/ experimental::autoderef
+    experimental::bitwise experimental::const_attr experimental::lexical_subs
+    experimental::lexical_topic experimental::postderef experimental::re_strict
+    experimental::refaliasing experimental::regex_sets experimental::signatures
+    experimental::smartmatch experimental::win32_perlio imprecision layer
+    syscalls locale missing redundant illegalproto threads non_unicode nonchar
+    surrogate /];
 
 
 sub import {

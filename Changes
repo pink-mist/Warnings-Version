@@ -1,4 +1,7 @@
 {{$NEXT}}
+  Update for perl 5.22 support
+
+Warnings-Version-0.002003 2014-12-27
   Fix failing imprecision test on windows, and taint test when prerequisites
      are in PERL5LIB or PERLLIB
 

@@ -65,13 +65,14 @@ my %warnings = (
         \QAmbiguous call resolved as CORE::log(), qualify as such or use &\E
         /x,
     bareword  => qr/^\QBareword found in conditional/,
-    deprecated => qr/^\Qdefined(\E\@\Qarray) is deprecated\E/,
+    deprecated => qr/^\Qdefined(\E\@\Qarray) is deprecated\E|^\QCan't use 'defined(\E\@\Qarray)' (Maybe you should just omit the defined()?)\E/,
     digit     => qr/^\QIllegal octal digit '8'\E/, # Since this causes an error
         # we'll clobber it:
     digit     => "Digit warnings seem to be fatal errors rather than warnings",
     parenthesis => qr/^\QParentheses missing around "my" list\E/,
     precedence => qr/^\QPrecedence problem: open FOO should be open(FOO)\E/,
-    printf    => qr/^\QInvalid conversion in sprintf: "%A"\E/,
+    # Argument "foo" isn't numeric in sprintf
+    printf    => qr/^\QInvalid conversion in sprintf: "%A"\E|^\QArgument "foo" isn't numeric in sprintf\E/,
     prototype => qr/^\Qmain::foo() called too early to check prototype\E/,
     qw        => qr/^\QPossible attempt to put comments in qw() list\E/,
     reserved  => qr/^
