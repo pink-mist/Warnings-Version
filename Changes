@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+Warnings-Version-0.003002  2015-06-19
   Locale test on windows doesn't work, so disable it when $^O eq MSWin32
 
 Warnings-Version-0.003001  2015-06-19
