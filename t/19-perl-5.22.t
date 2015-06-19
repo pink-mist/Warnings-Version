@@ -9,10 +9,10 @@ use Config;
 
 
 use Test::More ;
-use Test::More ($] < 5.020 ? (skip_all =>
-        'Need perl 5.20 or higher to run these tests') : '');
+use Test::More ($] < 5.022 ? (skip_all =>
+        'Need perl 5.22 or higher to run these tests') : '');
 
-use Warnings::Version '5.20';
+use Warnings::Version '5.22';
 
 
 my $prefix       = dirname $0;
