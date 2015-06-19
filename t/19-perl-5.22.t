@@ -27,7 +27,11 @@ my %warnings = (
     experimental__re_strict => qr/^\Q"use re 'strict'" is experimental\E/,
     experimental__refaliasing => qr/^\QAliasing via reference is experimental\E/,
     experimental__win32_perlio => 'No win32 to test on',
-    locale => qr/^\QUse of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale\E/,
+    locale => sub {
+        $^O eq 'MSWin32' ?
+            "locale test not implemented on MSWin32" :
+            qr/^\QUse of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale\E/;
+    },
     missing => qr/^\QMissing argument in sprintf\E/,
     redundant => qr/^\QRedundant argument in sprintf\E/,
 );
@@ -39,6 +43,7 @@ sub check_warnings {
         SKIP: {
             skip "Warning $warning not implemented", 1 unless exists
                                                        $warnings{$warning};
+            if (ref $warnings{$warning} eq 'CODE') { $warnings{$warning} = $warnings{$warning}->(); }
             skip $warnings{$warning}, 1 unless ref $warnings{$warning}
                                                                eq 'Regexp';
 
